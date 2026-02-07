@@ -18,5 +18,12 @@ db.customers.aggregate([
         localField:"_id",
         foreignField:"customerId",
         as:"orders"
+    }},
+    {$unwind:"$orders"},
+    {$project:{
+        _id:0,
+        name:1,
+        product:"$orders.product",
+        price:"$orders.price"
     }}
 ])
