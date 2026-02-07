@@ -12,3 +12,11 @@ db.orders.insertMany([
 ])
 
 //display customer name, product and price
+db.customers.aggregate([
+    {$lookup:{
+        from:"orders",
+        localField:"_id",
+        foreignField:"customerId",
+        as:"orders"
+    }}
+])
